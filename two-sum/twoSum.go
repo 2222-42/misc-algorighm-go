@@ -30,8 +30,27 @@ func TwoSumTwoPass(nums []int, target int) []int {
 			} else {
 				result = []int{i, v}
 			}
-
 		}
+	}
+	return result
+}
+
+// One-pass Hash Table
+func TwoSumOnePass(nums []int, target int) []int {
+	var result []int
+	hashTable := map[int]int{}
+
+	for i := 0; i < len(nums); i++ {
+		complement := target - nums[i]
+		v, ok := hashTable[complement]
+		if ok && v != i {
+			if v < i {
+				result = []int{v, i}
+			} else {
+				result = []int{i, v}
+			}
+		}
+		hashTable[nums[i]] = i
 	}
 	return result
 }
