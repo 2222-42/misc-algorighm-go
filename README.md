@@ -1,1 +1,1 @@
-# misc-sort-go
+# misc-algorithm-go
