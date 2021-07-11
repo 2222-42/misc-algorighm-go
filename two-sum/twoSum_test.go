@@ -29,9 +29,14 @@ func TestTwoSum(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		result := TwoSum(test.in, test.target)
-		if !reflect.DeepEqual(test.want, result) {
-			t.Errorf("expected: %v, result: %v", test.want, result)
+		result1 := TwoSum(test.in, test.target)
+		if !reflect.DeepEqual(test.want, result1) {
+			t.Errorf("by TwoSum, expected: %v, result: %v", test.want, result1)
+		}
+
+		result2 := TwoSumTwoPass(test.in, test.target)
+		if !reflect.DeepEqual(test.want, result2) {
+			t.Errorf("by TwoSumTwoPass, expected: %v, result: %v", test.want, result2)
 		}
 	}
 }
