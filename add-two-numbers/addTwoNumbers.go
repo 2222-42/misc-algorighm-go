@@ -1,6 +1,12 @@
 package add_two_numbers
 
-func AddTwoNumbers(a []int, b []int) []int {
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
 
-	return nil
+func AddTwoNumbers(listA *ListNode, listB *ListNode) *ListNode {
+	var result *ListNode
+
+	return result
 }
