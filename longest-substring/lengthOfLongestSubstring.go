@@ -58,3 +58,30 @@ func LengthOfLongestSubstring(s string) int {
 
 	return result
 }
+
+// 4 ms	3.2 MB
+func LengthOfLongestSubstringImproved(s string) int {
+	// 複数byteで表現されるケースがあるので、runeを使うのが望ましい。
+	// mは文字をkeyとする値がindexのmap
+	// maxは最大substringの長さ
+	// leftは探索範囲の左端のindex
+	m, max, left := make(map[rune]int), 0, 0
+	for idx, c := range s {
+		// その文字をkeyとするmapがあり、かつ、leftより大きい場合は、終えて、長さを調べる
+		if _, ok := m[c]; ok && m[c] >= left {
+			if idx-left > max {
+				max = idx - left
+			}
+			// 次の探索範囲は、既出の文字のindexの次の場所から
+			left = m[c] + 1
+		}
+		// 文字とindexのmapを作る
+		m[c] = idx
+	}
+
+	// 末まで言った場合、maxの値が更新されないのでここで実施する
+	if len(s)-left > max {
+		max = len(s) - left
+	}
+	return max
+}

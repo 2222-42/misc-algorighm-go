@@ -37,5 +37,11 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 		if !reflect.DeepEqual(test.want, result1) {
 			t.Errorf("in: %v, expected: %v, result: %v", test.in, test.want, result1)
 		}
+
+		result2 := LengthOfLongestSubstringImproved(test.in)
+		if !reflect.DeepEqual(test.want, result2) {
+			t.Errorf("in: %v, expected: %v, result: %v", test.in, test.want, result2)
+		}
+
 	}
 }
