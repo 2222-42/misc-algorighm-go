@@ -56,5 +56,10 @@ func TestFindMedianSortedArrays(t *testing.T) {
 		if !reflect.DeepEqual(s.want, result) {
 			t.Errorf("fail the case nums1: %v, nums2: %v,\nexpected: %v, result: %v", s.in.nums1, s.in.nums2, s.want, result)
 		}
+
+		result2 := FindMedianSortedArraysRefactored(s.in.nums1, s.in.nums2)
+		if !reflect.DeepEqual(s.want, result2) {
+			t.Errorf("fail the case nums1: %v, nums2: %v,\nexpected: %v, result: %v", s.in.nums1, s.in.nums2, s.want, result2)
+		}
 	}
 }
