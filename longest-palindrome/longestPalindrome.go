@@ -1,14 +1,22 @@
 package longest_palindrome
 
 import (
+	"fmt"
 	"strings"
 )
 
 func LongestPalindrome(s string) string {
-	/* 方針:
+	/* 方針1:
 	stringから部分を取っていく
 	1文字目は必ずOK
 	n文字目がこれまでの文字に含まれていたら候補に入れる、なかったら候補に入れない
+	*/
+
+	/* 方針2:
+	stringから部分を取っていく
+	1文字目は必ずOK
+	n文字目を含めて、確認する
+		確認する方法は、真ん中の文字をとって、そこから比較していく。
 	*/
 
 	sliceOfString := strings.Split(s, "")
@@ -35,22 +43,39 @@ func LongestPalindrome(s string) string {
 		}
 	}
 
-	maxLength := 0
-	result := ""
+	newCandidates := []string{}
 	for _, comp := range candidates {
-		if comp == reverseString(comp) && len(comp) > maxLength {
-			maxLength = len(comp)
-			result = comp
+		lenOfComp := len(comp)
+		simplified := ""
+		med := (lenOfComp / 2)
+		if lenOfComp%2 == 0 {
+			simplified = checkValidString(comp, med-1, med)
+		} else {
+			simplified = checkValidString(comp, med, med)
+		}
+
+		newCandidates = append(newCandidates, simplified)
+	}
+
+	result := ""
+	maxLength := 0
+	for _, candidate := range newCandidates {
+		if len(candidate) > maxLength {
+			maxLength = len(candidate)
+			result = candidate
 		}
 	}
 
 	return result
 }
 
-func reverseString(s string) string {
-	runes := []rune(s)
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
+func checkValidString(s string, start, end int) string {
+	fmt.Printf("start: %d, end: %d\n", start, end)
+	for start >= 0 && end <= len(s)-1 && s[start] == s[end] {
+		start -= 1
+		end += 1
 	}
-	return string(runes)
+	fmt.Printf("start: %d, end: %d\n", start, end)
+
+	return s[start+1 : end]
 }
