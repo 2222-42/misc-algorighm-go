@@ -13,6 +13,14 @@ func TestCheck(t *testing.T) {
 	s3 := ReturnInitialSlice() // use var
 	s4 := ReturnMadeSlice()    // use make
 
+	if (len(s1) != len(s2)) || (len(s2) != len(s3)) || (len(s3) != len(s4)) {
+		t.Error("every length should be equaled")
+	}
+
+	if (cap(s1) != cap(s2)) || (cap(s2) != cap(s3)) || (cap(s3) != cap(s4)) {
+		t.Error("every capacity should be equaled")
+	}
+
 	// nil と emptyは等しくない
 	if reflect.DeepEqual(s1, s2) {
 		t.Errorf("expected: %v, result: %v", s1, s2)
